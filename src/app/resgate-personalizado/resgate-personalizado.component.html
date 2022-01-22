@@ -1,0 +1,123 @@
+<div [hidden]="modal" id="modal-custom"> 
+    <div class="col controle-modal-custom">
+        <div class="row">
+            <div class="w-50 mx-auto box-custom-1 bg-dark-1 p-4 text-center" *ngIf="msgInvalido">                
+                <h3 class="titulo txt-white-2">Dados inválidos</h3>
+                <p class="txt-white-2">Você preencheu um ou mais campos com o valor acima do permitido</p>
+                <p *ngFor="let item of acoes" class="mb-0"> 
+                    <span *ngIf="item.valorResgate > item.saldoAcumuladoDecimal">{{item.nome}}: O valor a resgatar não pode ser maior que {{item.saldoAcumulado}} .</span>
+                </p>
+                <button (click)="fecharModal('edit')" class="btn bg-green-1 btn-type-2 mt-4">
+                    Corrigir
+                </button>                
+            </div>
+
+            <div class="w-50 mx-auto box-custom-1 bg-dark-1 p-4 text-center" *ngIf="!msgInvalido">                
+                <h3 class="titulo txt-white-2">Resgate efetuado com sucesso!</h3>                
+                <button (click)="fecharModal('edit')" class="btn btn-type-2 mt-4 ms-2">
+                    Continuar
+                </button>                    
+                <button (click)="fecharModal('novo')" class="btn bg-green-1 btn-type-2 mt-4">
+                    Novo Resgate
+                </button>            
+            </div>            
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row my-4">
+        <div class="col-10">
+            <h3 class="titulo">Dados do investimento</h3>
+        </div>
+        <div class="col-2 d-grid">
+            <button class="btn-type-2 bg-azul-1"  [routerLink]="'/home'" >
+                <span class="material-icons mt-1"> arrow_back </span>
+            </button>
+        </div>
+    </div> 
+    <div class="row ">
+        <div class="col-12">
+            <div class=" box-custom-1 info bg-dark-1">
+                <div class="row">
+                    <div class="col-12 col-sm-4 p-4 text-center text-lg-start">
+                        <span class="material-icons  float-lg-start me-2">label_important </span>
+                        <p class="mb-0">Nome</p>
+                        <p  class="mb-0">{{investimento.nome}}</p>
+                    </div>
+                    <div class="col-12 col-sm-4 p-4 text-center text-lg-start">
+                        <span class="material-icons float-lg-start me-2">track_changes </span>
+                        <p class="mb-0">Objetivo</p>
+                        <p  class="mb-0">{{investimento.objetivo}}</p>
+                    </div>
+                    <div class="col-12 col-sm-4 p-4 text-center text-lg-start">
+                        <span class="material-icons float-lg-start me-2">account_balance_wallet </span>
+                        <p class="mb-0">Saldo</p> 
+                        <p  class="mb-0">{{ converterMoeda(investimento.saldoTotal, 'real') }}</p>
+                    </div>  
+                </div>
+            </div>
+
+        </div>              
+    </div>
+
+    <div class="row my-4">
+        <div class="col-12">
+            <h3 class="titulo">Resgate</h3>
+        </div>
+    </div>   
+    
+    <div class="row">                       
+        <div class="col-12">
+            <div class="box-custom-1 bg-dark-1">
+                <div class="table-responsive">                    
+                    <table class="table" >
+                        <thead>
+                            <tr>
+                                <th>
+                                    Ação
+                                </th>
+                                <th>
+                                    Saldo acumulado
+                                </th>
+                                <th>
+                                    Valor a resgatar
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of acoes; let i = index">
+                                <td>{{item.nome}}</td>
+                                <td>{{ item.saldoAcumulado }}</td>                                
+                                <td>
+                                    <span 
+                                        [ngClass]="{
+                                            'msgPrice': acoes[i].valorResgate > acoes[i].saldoAcumuladoDecimal, 
+                                            'noMsg'  : (acoes[i].valorResgate === null || acoes[i].saldoAcumuladoDecimal > acoes[i].valorResgate)
+                                        }">
+                                        O valor a resgatar não pode ser maior que {{item.saldoAcumulado}} .
+                                    </span>
+                                    <input currencyMask (ngModelChange)="somarValorResgate(acoes[i].valorResgate)" [(ngModel)]="acoes[i].valorResgate" placeholder="Digite quanto quer resgatar" class="inputbox">                                    
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <p class="ms-4 robot-bold">Valor total do resgate: {{ converterMoeda(valorTotalRestage, 'real')}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>           
+    </div>
+
+    <div class="row mt-4">     
+        <div class="d-grid gap-2 d-flex justify-content-end">
+            <button class="btn bg-green-1 btn-type-2" (click)="verificarValores(acoes)">
+                Confirmar resgate
+            </button>
+        </div>
+    </div>
+    
+</div>

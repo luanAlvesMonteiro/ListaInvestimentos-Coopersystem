@@ -1,0 +1,32 @@
+/*cores*/
+.bg-white { background: #FFFFFF; }
+.bg-dark-1 { background: #25273b; }
+.bg-dark-2 { background: #2f3243; }
+.bg-azul-1 { background: #6b6fa1; }
+.bg-green-1 { background: #32564b; }
+
+/*cor fontes*/
+.txt-gray-1 { color: #585c6d; }
+.txt-white-1 { color: #FFFFFF; }
+.txt-white-2 { color: #a7a7a7; }
+
+
+/*tipo fontes */
+.robot-light { font-family: 'Roboto-Light'; }
+.robot-medium { font-family: 'Roboto-Medium'; }
+.robot-bold { font-family: 'Roboto-Bold';  }
+.robot-Italic { font-family: 'Roboto-Italic'; }
+
+.fnt-11 {font-size: 11px;}
+.fnt-12 {font-size: 12px;}
+.fnt-13 {font-size: 13px;}
+.fnt-14 {font-size: 14px;}
+.fnt-15 {font-size: 15px;}
+.fnt-16 {font-size: 16px;}
+.fnt-17 {font-size: 17px;}
+.fnt-18 {font-size: 18px;}
+.fnt-19 {font-size: 19px;}
+.fnt-20 {font-size: 20px;}
+.fnt-21 {font-size: 21px;}
+.fnt-22 {font-size: 22px;}
+

@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="row my-4">
+        <div class="col-12">
+            <h3 class="titulo">Investimentos</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">            
+            <div class="box-custom-1 bg-dark-1">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Nome
+                                </th>
+                                <th>
+                                    Objetivo
+                                </th>
+                                <th>
+                                    Saldo total
+                                </th>
+                                <th>
+
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of listaInvestimentos; let i = index" [ngClass]="{'desabilitado' : item.indicadorCarencia == 'S' }">
+                                <td>{{item.nome}}</td>
+                                <td>{{item.objetivo}}</td>
+                                <td>{{ converterMoeda(item.saldoTotal, 'real') }}</td>
+                                <td class="text-center">
+                                    <button class="btn btn-sm btn-type-1" *ngIf="item.indicadorCarencia == 'N' "  [routerLink]="'/resgate/'+i " >
+                                        Resgatar
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
